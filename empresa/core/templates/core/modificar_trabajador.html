@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Datos del Trabajador</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f9;
+        }
+        .sidebar {
+            background-color: #343a40;
+            color: #fff;
+            width: 220px;
+            height: 100vh;
+            padding-top: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            background-color: #575757;
+            padding: 10px;
+        }
+        .main-content {
+            margin-left: 220px;
+            padding: 30px;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .form-control {
+            margin-bottom: 15px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar p-3">
+        <h4>Recursos Humanos</h4>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a href="/recursos_humanos/" class="nav-link">
+                    <i class="fa fa-users"></i> Ver Trabajadores
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Modificar Datos del Trabajador</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" class="form-control" value="{{ form.nombre.value }}" required>
+                            <div class="invalid-feedback">Por favor ingrese un nombre válido.</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="apellido" class="form-label">Apellido</label>
+                            <input type="text" id="apellido" name="apellido" class="form-control" value="{{ form.apellido.value }}" required>
+                            <div class="invalid-feedback">Por favor ingrese un apellido válido.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Correo Electrónico</label>
+                            <input type="email" id="email" name="email" class="form-control" value="{{ form.email.value }}" required>
+                            <div class="invalid-feedback">Por favor ingrese un correo válido.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rol" class="form-label">Rol</label>
+                            <select id="rol" name="rol" class="form-select" required>
+                                <option value="repartidor" {% if form.rol.value == 'repartidor' %} selected {% endif %}>Repartidor</option>
+                                <option value="recepcionista" {% if form.rol.value == 'recepcionista' %} selected {% endif %}>Recepcionista</option>
+                                <option value="recursos_humanos" {% if form.rol.value == 'recursos_humanos' %} selected {% endif %}>Recursos Humanos</option>
+                                <option value="jefe" {% if form.rol.value == 'jefe' %} selected {% endif %}>Jefe</option>
+                            </select>
+                            <div class="invalid-feedback">Por favor seleccione un rol válido.</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and validation script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Bootstrap form validation script
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+</body>
+</html>

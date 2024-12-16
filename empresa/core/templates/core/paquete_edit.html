@@ -1,0 +1,29 @@
+<!-- Paquete Edit -->
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="codigo">Código</label>
+        <input type="text" id="codigo" name="codigo" class="form-control" value="{{ paquete.codigo }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="destinatario">Destinatario</label>
+        <input type="text" id="destinatario" name="destinatario" class="form-control" value="{{ paquete.destinatario }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="direccion">Dirección</label>
+        <input type="text" id="direccion" name="direccion" class="form-control" value="{{ paquete.direccion }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="estado">Estado</label>
+        <select id="estado" name="estado" class="form-select" required>
+            <option value="Pendiente" {% if paquete.estado == 'Pendiente' %} selected {% endif %}>Pendiente</option>
+            <option value="Asignado" {% if paquete.estado == 'Asignado' %} selected {% endif %}>Asignado</option>
+            <option value="Entregado" {% if paquete.estado == 'Entregado' %} selected {% endif %}>Entregado</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+</form>
